@@ -11,15 +11,8 @@ const readHTML = path =>
     });
   });
 
-const html = cheerio.load(readHTML(url).then(function (result) {
-	return result;
-}));
-
-request(url, function (err, res, body) {
-	if (err) return err;
-
-	var htmlThing = html.load(body);
-
-	console.log(htmlThing('h2').text());
-
-});
+readHTML(url)
+  .then(res => {
+    const $ = cheerio.load(res);
+    console.log($('h1').text())
+  })
